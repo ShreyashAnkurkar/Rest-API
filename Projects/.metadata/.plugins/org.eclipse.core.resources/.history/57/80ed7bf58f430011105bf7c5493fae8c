@@ -1,0 +1,8 @@
+package com.nit.model;
+
+public class Books {
+
+	private Integer bookId;
+	private String BookName;
+	private Double price;
+}

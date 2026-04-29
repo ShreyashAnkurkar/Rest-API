@@ -1,0 +1,13 @@
+package com.nit.service;
+
+import com.nit.vo.DoctorVo;
+
+public class DoctorManagementServiceImpl implements IDoctorManagementService {
+
+	@Override
+	public String registerDoctor(DoctorVo doctor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

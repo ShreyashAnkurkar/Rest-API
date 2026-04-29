@@ -1,0 +1,99 @@
+// Handles HTTP GET request for URL: /report
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+public class CustomerOperationController{
+@GetMapping("/report")
+public ResponseEntity<String> showReportByData(
+        // Binds request parameter "sno" from URL to method variable 'no'
+        // Example: /report?sno=101&sname=John
+        @RequestParam("sno") int no,
+
+        // Binds request parameter "sname" to method variable 'name'
+        @RequestParam("sname") String name) {
+
+    // Returns response with parameter values and HTTP status 200 (OK)
+    return new ResponseEntity<String>(
+            "Param values::" + no + "," + name,
+            HttpStatus.OK);
+}
+
+/*
+ * ===================== @RequestParam Explanation =====================
+ *
+ * 1. @RequestParam is used to bind HTTP request parameters (query params)
+ *    to method arguments in Spring Boot.
+ *
+ * 2. Example URL:
+ *    /report?sno=101&sname=John
+ *
+ *    sno → mapped to 'no'
+ *    sname → mapped to 'name'
+ *
+ * 3. If request parameter name and variable name are DIFFERENT,
+ *    you MUST specify the name inside @RequestParam.
+ *
+ *    Example:
+ *    @RequestParam("sno") int no
+ *
+ * 4. If request parameter name and variable name are SAME,
+ *    you can omit the value:
+ *
+ *    Example:
+ *    @RequestParam int no
+ *
+ *    Spring automatically maps based on variable name.
+ *
+ * =====================================================================
+ */
+
+
+// Handles HTTP GET request for URL: /report2
+@GetMapping("/report2")
+public ResponseEntity<String> showReport(
+
+        // 'required=false' → parameter is optional
+        // 'defaultValue=101' → used if parameter is missing
+        // Example: /report2 OR /report2?no=200
+        @RequestParam(required = false, defaultValue = "101") Integer no,
+
+        // Default value "sunny" is used if 'name' is not provided
+        @RequestParam(required = false, defaultValue = "sunny") String name) {
+
+    // Returns response with values (default or provided)
+    return new ResponseEntity<String>(
+            "Param values::" + no + "," + name,
+            HttpStatus.OK);
+}
+}
+
+/*
+ * ===================== Key Points =====================
+ *
+ * 1. required = true (default)
+ *    → Parameter must be present in request
+ *    → Otherwise: 400 Bad Request
+ *
+ * 2. required = false
+ *    → Parameter becomes optional
+ *
+ * 3. defaultValue
+ *    → Used when parameter is missing or empty
+ *    → Automatically makes required = false
+ *
+ * 4. Example Calls:
+ *
+ *    /report2
+ *    → Output: Param values::101,sunny
+ *
+ *    /report2?no=200
+ *    → Output: Param values::200,sunny
+ *
+ *    /report2?name=Ram
+ *    → Output: Param values::101,Ram
+ *
+ * =====================================================
+ */

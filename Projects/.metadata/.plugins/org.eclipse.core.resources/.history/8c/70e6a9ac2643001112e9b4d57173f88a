@@ -1,0 +1,99 @@
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/customer-api")   // Base URL for all endpoints in this controller
+public class CustomerOperationsController {
+
+    // Handles multiple URL patterns:
+    // 1. /customer-api/report/{no}/{name}
+    // 2. /customer-api/report/{no}
+    // 3. /customer-api/report/{name}
+    @GetMapping({"/report/{no}/{name}", "/report/{no}", "/report/{name}"})
+    public ResponseEntity<String> showReportByData(
+
+            // Binds value from URL path variable 'no' to method parameter 'no'
+            // required = false → allows missing path variable
+            @PathVariable(required = false) Integer no,
+
+            // Binds value from URL path variable 'name' to method parameter 'name'
+            @PathVariable(required = false) String name) {
+
+        // Returns response with extracted path variable values
+        return new ResponseEntity<String>(
+                "PathVariableData: " + no + "," + name,
+                HttpStatus.OK);
+    }
+}
+
+/*
+ * ===================== @PathVariable Explanation =====================
+ *
+ * 1. @PathVariable is used to extract values from the URL path
+ *    and bind them to method parameters.
+ *
+ * 2. Unlike @RequestParam (query parameters),
+ *    @PathVariable works with URL segments.
+ *
+ * ---------------------------------------------------------------------
+ * Example URLs:
+ *
+ * 1. /customer-api/report/101/John
+ *    → no = 101
+ *    → name = John
+ *
+ * 2. /customer-api/report/101
+ *    → no = 101
+ *    → name = null
+ *
+ * 3. /customer-api/report/John
+ *    → no = null
+ *    → name = John
+ *
+ * ---------------------------------------------------------------------
+ *
+ * 3. If variable name and path variable name are SAME:
+ *
+ *    @PathVariable Integer no   // no need to specify name
+ *
+ * 4. If DIFFERENT:
+ *
+ *    @PathVariable("no") Integer number
+ *
+ * ---------------------------------------------------------------------
+ *
+ * 5. required = true (default)
+ *    → Path variable must be present
+ *    → Otherwise: error (404 / 400 depending on mapping)
+ *
+ * 6. required = false
+ *    → Makes path variable optional
+ *    → Useful when handling multiple URL patterns
+ *
+ * ---------------------------------------------------------------------
+ *
+ * ⚠️ Important Note:
+ * Having both "/report/{no}" and "/report/{name}" can cause ambiguity
+ * because Spring cannot always differentiate between Integer and String.
+ *
+ * Example problem:
+ *    /report/101  → is it 'no' or 'name'?
+ *
+ * ✅ Better Approach:
+ *    Use different paths:
+ *    /report/id/{no}
+ *    /report/name/{name}
+ *
+ * ---------------------------------------------------------------------
+ *
+ * ===================== Key Difference =====================
+ *
+ * @RequestParam → /report?no=101&name=John   (Query Parameter)
+ * @PathVariable → /report/101/John          (Path Parameter)
+ *
+ * =========================================================
+ */

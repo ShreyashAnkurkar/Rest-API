@@ -1,0 +1,26 @@
+package com.nit.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
+@Entity
+@Table(name="API_DOCTOR_TAB")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
+public class DoctorEntity {
+
+	@Id
+	@SequenceGenerator(name="gen1",sequenceName = "DID",initialValue = 101,allocationSize = 1)
+	private Integer id;
+	
+	private String dname;
+	
+	private String address;
+}

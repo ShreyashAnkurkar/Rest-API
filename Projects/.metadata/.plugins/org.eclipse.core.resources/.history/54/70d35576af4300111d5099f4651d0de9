@@ -1,0 +1,71 @@
+package com.nit.vo;
+
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name="API_DOCTOR_TAB")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DoctorVo {
+
+	@Id
+	@SequenceGenerator(name="gen1",sequenceName = "DID",initialValue = 101,allocationSize = 1)
+	@GeneratedValue(generator = "gen1",strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	
+	@Column(length = 30)
+	private String dname;
+	@Column(length = 30)
+	private String address;
+	private Double fees;
+	@Column(length = 30)
+	private String specialization;
+	
+	//metadata properties
+	
+	@Version
+	private Integer updateCount;
+	
+	@CreationTimestamp
+	@Column(insertable = true,updatable = false)
+	private LocalDateTime registeredOn;
+	
+	@CreationTimestamp
+	@Column(insertable = false,updatable = true)
+	private LocalDateTime lastUpdated;
+	
+	@Column(length = 30,insertable = true,updatable = false)
+	private String createdBy;
+	@Column(length = 30,insertable = false,updatable = true)
+	private String updatedBy;
+	
+	@Column(length = 30)
+	private String active_Sw;
+
+	public DoctorEntity(String dname, String address, Double fees, String specialization) {
+		super();
+		this.dname = dname;
+		this.address = address;
+		this.fees = fees;
+		this.specialization = specialization;
+	}
+	
+	
+	
+}

@@ -1,0 +1,15 @@
+package com.nit.rest;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/customer-api")
+public class CustomerOperationsController {
+
+	public ResponseEntity<String> showReportByData(@PathVariable("cno") Integer no,@PathVariable("cname") String cname){
+		
+	}
+}

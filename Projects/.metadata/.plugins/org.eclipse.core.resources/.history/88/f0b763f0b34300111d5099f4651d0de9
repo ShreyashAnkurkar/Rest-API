@@ -1,0 +1,18 @@
+package com.nit.rest;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.nit.vo.DoctorVo;
+
+@RestController
+@RequestMapping("/Doctor-api")
+public class DoctorOperationRestController {
+	@I
+
+	public ResponseEntity<String> saveDoctor(@RequestBody DoctorVo vo){
+		
+	}
+}

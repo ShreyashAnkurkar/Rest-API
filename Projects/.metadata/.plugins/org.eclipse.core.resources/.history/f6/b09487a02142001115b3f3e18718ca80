@@ -1,0 +1,6 @@
+package com.nit.rest;
+
+@RestController
+public class SeasonFinderOperationsRestController {
+
+}

@@ -1,0 +1,8 @@
+package com.nit.service;
+
+import com.nit.vo.DoctorVo;
+
+public interface IDoctorManagementService {
+
+	public String registerDoctor(DoctorVo doctor);
+}

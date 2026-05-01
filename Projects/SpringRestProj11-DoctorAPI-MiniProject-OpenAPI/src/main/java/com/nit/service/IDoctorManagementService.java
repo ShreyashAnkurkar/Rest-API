@@ -1,0 +1,17 @@
+package com.nit.service;
+
+import java.util.List;
+
+import com.nit.vo.DoctorVo;
+
+public interface IDoctorManagementService {
+
+	public String registerDoctor(DoctorVo doctor);
+	public String registerDoctors(List<DoctorVo> listVo);
+	public DoctorVo showDoctorById(int id);
+	public List<DoctorVo> showAllDoctors();
+	public String hikeDoctorFeeById(int id,float hikePercentage);
+	public String updateDocterDetails(DoctorVo vo);
+	public String deleteDoctorbyId(int id);
+	public String deleteDoctorsByFeeRange(float start,float end);
+}

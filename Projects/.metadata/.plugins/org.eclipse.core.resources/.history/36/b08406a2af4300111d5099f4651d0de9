@@ -1,9 +1,0 @@
-package com.nit.vo;
-
-public class DoctorVo {
-	private Integer id;
-	private String dname;
-	private String address;
-	private Double fees;
-	private String specialization;
-}

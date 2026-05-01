@@ -8,8 +8,8 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class SpringRestProj12DoctorApiConsumerAppsApplication {
 
-	@Bean
-	public RestTemplate restTemplate() {
+    @Bean
+    RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
 	public static void main(String[] args) {
